@@ -1,5 +1,5 @@
-import { Suspense, useState, useEffect } from 'react';
-import { NavLink, Outlet, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { movieSearchAPI } from 'services/filmAPI';
 const Movies = () => {
   const [query, setQuery] = useState('');
@@ -24,7 +24,7 @@ const Movies = () => {
         <ul>
           {searchFilm.map(({ id, original_title }) => (
             <li key={id}>
-              <Link to={`${id}`}>{original_title}</Link>
+              <NavLink to={`${id}`}>{original_title}</NavLink>
             </li>
           ))}
         </ul>
