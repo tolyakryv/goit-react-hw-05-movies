@@ -9,9 +9,9 @@ export const movieDayAPI = () => {
     .then(response => response.data);
 };
 
-export const movieSearchAPI = () => {
+export const movieSearchAPI = query => {
   return axios
-    .get(`${BASE_URL}/search/movie/?api_key=${KEY}&query=Jack`)
+    .get(`${BASE_URL}/search/movie/?api_key=${KEY}&query=${query}`)
     .then(response => response.data);
 };
 export const movieDetailsAPI = id => {
