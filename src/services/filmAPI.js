@@ -13,10 +13,10 @@ export const movieDayAPI = async () => {
   }
 };
 
-export const movieSearchAPI = async query => {
+export const movieSearchAPI = async (query = '') => {
   try {
     return await axios
-      .get(`${BASE_URL}/search/movie/?api_key=${KEY}&query=${query}`)
+      .get(`${BASE_URL}/search/movie/?api_key=${KEY}&query=${query}&page=1`)
       .then(response => response.data);
   } catch (error) {
     console.error(error);
