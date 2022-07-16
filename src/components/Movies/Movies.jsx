@@ -12,7 +12,7 @@ const Movies = () => {
         setSearchFilm(data.results);
       });
     }
-  }, [query, queryParams]);
+  }, [queryParams]);
   function changeInput(e) {
     setQuery(e.currentTarget.value);
   }
@@ -24,8 +24,9 @@ const Movies = () => {
       return;
     }
     setQueryParams({ query: query });
-
-    return;
+    movieSearchAPI(query).then(data => {
+      setSearchFilm(data.results);
+    });
   };
   return (
     <>
