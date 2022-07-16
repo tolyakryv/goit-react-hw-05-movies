@@ -6,10 +6,13 @@ const Movies = () => {
   const [query, setQuery] = useState('');
   const [searchFilm, setSearchFilm] = useState([]);
   useEffect(() => {
-    movieSearchAPI(queryParams).then(data => {
-      setSearchFilm(data.results);
-    });
-  }, [queryParams]);
+    const querySearch = queryParams.get('query');
+    if (querySearch !== null) {
+      movieSearchAPI(querySearch).then(data => {
+        setSearchFilm(data.results);
+      });
+    }
+  }, [query, queryParams]);
   function changeInput(e) {
     setQuery(e.currentTarget.value);
   }
@@ -20,7 +23,7 @@ const Movies = () => {
       alert('enter text');
       return;
     }
-    setQueryParams(query);
+    setQueryParams({ query: query });
 
     return;
   };
