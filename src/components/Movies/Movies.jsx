@@ -8,6 +8,7 @@ const Movies = () => {
   const querySearch = queryParams.get('query');
   useEffect(() => {
     if (querySearch !== null) {
+      setQuery(querySearch);
       movieSearchAPI(querySearch).then(({ results }) => {
         setSearchFilm(results);
       });
@@ -24,9 +25,8 @@ const Movies = () => {
       return;
     }
     setQueryParams({ query: query });
-
-    movieSearchAPI(query).then(data => {
-      setSearchFilm(data.results);
+    movieSearchAPI(querySearch).then(({ results }) => {
+      setSearchFilm(results);
     });
   };
   return (
