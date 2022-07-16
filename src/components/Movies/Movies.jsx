@@ -8,13 +8,13 @@ const Movies = () => {
   const querySearch = queryParams.get('query');
   useEffect(() => {
     if (querySearch !== null) {
-      movieSearchAPI(querySearch).then(data => {
-        setSearchFilm(data.results);
+      movieSearchAPI(querySearch).then(({ results }) => {
+        setSearchFilm(results);
       });
     }
   }, [querySearch]);
   function changeInput(e) {
-    setQuery(e.currentTarget.value);
+    setQuery(e.currentTarget.value.trim());
   }
 
   const submitForm = e => {
