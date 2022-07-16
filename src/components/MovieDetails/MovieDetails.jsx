@@ -1,4 +1,4 @@
-import { lazy, useState } from 'react';
+import { lazy, useState, useEffect } from 'react';
 import { NavLink, useParams, Route, Routes } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { movieDetailsAPI } from 'services/filmAPI';
@@ -8,11 +8,13 @@ const Cast = lazy(() => import('../Cast'));
 const MovieDetails = () => {
   const [movies, setMovies] = useState(null);
   const { movieId } = useParams();
-
+  useEffect(() => {
+    movieDetailsAPI(movieId).then(result => {
+      setMovies(result);
+    });
+  }, [movieId]);
   const history = createBrowserHistory();
-  movieDetailsAPI(movieId).then(result => {
-    setMovies(result);
-  });
+
   if (movies) {
     const {
       poster_path,
