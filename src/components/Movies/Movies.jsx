@@ -1,23 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useSearchParams } from 'react-router-dom';
 import { movieSearchAPI } from 'services/filmAPI';
 const Movies = () => {
   const [queryParams, setQueryParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const [searchFilm, setSearchFilm] = useState([]);
+  useEffect(() => {
+    movieSearchAPI(queryParams).then(data => {
+      setSearchFilm(data.results);
+    });
+  }, [queryParams]);
   function changeInput(e) {
     setQuery(e.currentTarget.value);
   }
+
   const submitForm = e => {
     e.preventDefault();
     if (query === '') {
       alert('enter text');
       return;
     }
-    movieSearchAPI(query).then(data => {
-      setSearchFilm(data.results);
-      setQueryParams(query);
-    });
+    setQueryParams(query);
+
     return;
   };
   return (
