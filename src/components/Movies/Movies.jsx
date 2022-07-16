@@ -5,14 +5,14 @@ const Movies = () => {
   const [queryParams, setQueryParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const [searchFilm, setSearchFilm] = useState([]);
+  const querySearch = queryParams.get('query');
   useEffect(() => {
-    const querySearch = queryParams.get('query');
     if (querySearch !== null) {
       movieSearchAPI(querySearch).then(data => {
         setSearchFilm(data.results);
       });
     }
-  }, [queryParams]);
+  }, [querySearch]);
   function changeInput(e) {
     setQuery(e.currentTarget.value);
   }
