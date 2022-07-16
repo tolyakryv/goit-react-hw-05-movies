@@ -14,11 +14,11 @@ export const movieSearchAPI = query => {
     .get(`${BASE_URL}/search/movie/?api_key=${KEY}&query=${query}`)
     .then(response => response.data);
 };
-export const movieDetailsAPI = id => {
-  return axios
+export async function movieDetailsAPI(id) {
+  return await axios
     .get(`${BASE_URL}/movie/${id}?api_key=${KEY}`)
     .then(response => response.data);
-};
+}
 export const movieCreditsAPI = id => {
   return axios
     .get(`${BASE_URL}/movie/${id}/credits?api_key=${KEY}`)

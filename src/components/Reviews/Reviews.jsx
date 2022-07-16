@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { movieReviewsAPI } from 'services/filmAPI';
+import propTypes from 'prop-types';
+import s from './Reviews.module.css';
 const Reviews = ({ id }) => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -11,7 +13,7 @@ const Reviews = ({ id }) => {
 
   if (reviews.length !== 0) {
     return (
-      <ul>
+      <ul className={s.container}>
         {reviews.map(({ author, content }) => (
           <li key={author}>
             <h3>Author: {author}</h3>
@@ -25,3 +27,6 @@ const Reviews = ({ id }) => {
   }
 };
 export default Reviews;
+Reviews.propTypes = {
+  id: propTypes.string.isRequired,
+};

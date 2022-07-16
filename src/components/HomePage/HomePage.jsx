@@ -6,7 +6,7 @@ const HomePage = () => {
   useEffect(() => {
     movieDayAPI().then(resolve => setFilms(resolve.results));
   }, []);
-  console.log(films);
+
   return (
     <ul>
       {films.map(({ id, title }) => {
