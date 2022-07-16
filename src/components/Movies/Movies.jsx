@@ -24,6 +24,7 @@ const Movies = () => {
       alert('enter text');
       return;
     }
+
     setQueryParams({ query: query });
     movieSearchAPI(querySearch).then(({ results }) => {
       setSearchFilm(results);
