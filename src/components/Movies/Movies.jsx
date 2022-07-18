@@ -7,8 +7,7 @@ const Movies = () => {
   const [searchFilm, setSearchFilm] = useState([]);
   const querySearch = queryParams.get('query');
   useEffect(() => {
-    if (querySearch !== null) {
-      setQuery(querySearch);
+    if (querySearch) {
       movieSearchAPI(querySearch).then(({ results }) => {
         setSearchFilm(results);
       });
@@ -24,7 +23,6 @@ const Movies = () => {
       alert('enter text');
       return;
     }
-
     setQueryParams({ query: query });
     movieSearchAPI(querySearch).then(({ results }) => {
       setSearchFilm(results);

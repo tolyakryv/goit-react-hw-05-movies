@@ -17,11 +17,13 @@ const Cast = ({ id }) => {
         {cast.map(({ cast_id, character, name, profile_path }) => {
           return (
             <li key={cast_id}>
-              <img
-                className={s.img}
-                src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-                alt={name}
-              />
+              {profile_path && (
+                <img
+                  className={s.img}
+                  src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                  alt={name}
+                />
+              )}
               <p>{name}</p>
               <p>{character}</p>
             </li>
