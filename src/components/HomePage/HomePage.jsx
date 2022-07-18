@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { movieDayAPI } from 'services/filmAPI';
+
 const HomePage = () => {
   const [films, setFilms] = useState([]);
   useEffect(() => {
@@ -8,15 +9,18 @@ const HomePage = () => {
   }, []);
 
   return (
-    <ul>
-      {films.map(({ id, title }) => {
-        return (
-          <li key={id}>
-            <NavLink to={`movies/${id}`}>{title}</NavLink>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <h3>Trending today</h3>
+      <ul>
+        {films.map(({ id, title }) => {
+          return (
+            <li key={id}>
+              <NavLink to={`movies/${id}`}>{title}</NavLink>
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 };
 export default HomePage;
