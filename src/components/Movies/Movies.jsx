@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams, useLocation } from 'react-router-dom';
 import { movieSearchAPI } from 'services/filmAPI';
 const Movies = () => {
   const [queryParams, setQueryParams] = useSearchParams();
   const [query, setQuery] = useState('');
   const [searchFilm, setSearchFilm] = useState([]);
   const querySearch = queryParams.get('query');
+  const location = useLocation();
 
   useEffect(() => {
     if (querySearch) {
@@ -31,6 +32,7 @@ const Movies = () => {
       setSearchFilm(results);
     });
   };
+
   return (
     <>
       <form onSubmit={submitForm}>
@@ -41,7 +43,9 @@ const Movies = () => {
         <ul>
           {searchFilm.map(({ id, original_title }) => (
             <li key={id}>
-              <NavLink to={`${id}`}>{original_title}</NavLink>
+              <NavLink to={`${id}`} state={{ from: location }}>
+                {original_title}
+              </NavLink>
             </li>
           ))}
         </ul>

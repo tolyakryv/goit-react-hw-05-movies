@@ -1,11 +1,18 @@
 import { lazy, useState, useEffect, Suspense } from 'react';
-import { NavLink, useParams, Route, Routes } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import {
+  NavLink,
+  useParams,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
+// import { createBrowserHistory } from 'history';
 import { movieDetailsAPI } from 'services/filmAPI';
 import s from './MovieDetails.module.css';
 const Reviews = lazy(() => import('../Reviews'));
 const Cast = lazy(() => import('../Cast'));
 const MovieDetails = () => {
+  const location = useLocation();
   const [movies, setMovies] = useState(null);
   const { movieId } = useParams();
   useEffect(() => {
@@ -13,7 +20,7 @@ const MovieDetails = () => {
       setMovies(result);
     });
   }, [movieId]);
-  const history = createBrowserHistory();
+  // const history = createBrowserHistory();
 
   if (movies) {
     const {
@@ -24,12 +31,18 @@ const MovieDetails = () => {
       release_date,
       vote_average,
     } = movies;
+    const locationState = location.state?.from ?? '/';
     return (
       <>
         <div className={s.container}>
-          <button className={s.btn} onClick={() => history.back()}>
-            go back
-          </button>
+          <NavLink to={locationState}>
+            <button
+              className={s.btn}
+              // onClick={() => history.back()}
+            >
+              go back
+            </button>
+          </NavLink>
           <div className={s.movie_details}>
             <img
               className={s.img}
@@ -57,10 +70,14 @@ const MovieDetails = () => {
             <p>Additional information</p>
             <ul>
               <li>
-                <NavLink to="cast">Cast</NavLink>
+                <NavLink to="cast" state={{ from: locationState }}>
+                  Cast
+                </NavLink>
               </li>
               <li>
-                <NavLink to="reviews">Reviews</NavLink>
+                <NavLink to="reviews" state={{ from: locationState }}>
+                  Reviews
+                </NavLink>
               </li>
             </ul>
           </div>

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { movieDayAPI } from 'services/filmAPI';
 
 const HomePage = () => {
+  // const location = useLocation();
   const [films, setFilms] = useState([]);
   useEffect(() => {
     movieDayAPI().then(resolve => setFilms(resolve.results));
