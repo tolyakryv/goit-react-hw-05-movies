@@ -6,13 +6,16 @@ const Movies = () => {
   const [query, setQuery] = useState('');
   const [searchFilm, setSearchFilm] = useState([]);
   const querySearch = queryParams.get('query');
+
   useEffect(() => {
     if (querySearch) {
+      setQuery(querySearch);
       movieSearchAPI(querySearch).then(({ results }) => {
         setSearchFilm(results);
       });
     }
   }, [querySearch]);
+
   function changeInput(e) {
     setQuery(e.currentTarget.value.trim());
   }
@@ -31,7 +34,7 @@ const Movies = () => {
   return (
     <>
       <form onSubmit={submitForm}>
-        <input type="text" onChange={changeInput}></input>
+        <input type="text" value={query} onChange={changeInput}></input>
         <button type="submit">Search </button>
       </form>
       {queryParams && (

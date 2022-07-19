@@ -4,6 +4,7 @@ import Navigation from './Navigation/Navigation';
 const HomePage = lazy(() => import('./HomePage/index'));
 const Movies = lazy(() => import('./Movies/index.js'));
 const MovieDetails = lazy(() => import('./MovieDetails'));
+const NotFound = lazy(() => import('./NotFound'));
 
 export const App = () => {
   return (
@@ -14,7 +15,7 @@ export const App = () => {
         <Route path="movies/:movieId/*" element={<MovieDetails />} />
       </Route>
 
-      <Route path="*" element={<div>OOOOOOOPS</div>}></Route>
+      <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
 };

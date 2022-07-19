@@ -1,4 +1,4 @@
-import { lazy, useState, useEffect } from 'react';
+import { lazy, useState, useEffect, Suspense } from 'react';
 import { NavLink, useParams, Route, Routes } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { movieDetailsAPI } from 'services/filmAPI';
@@ -65,10 +65,12 @@ const MovieDetails = () => {
             </ul>
           </div>
         </div>
-        <Routes>
-          <Route path="reviews" element={<Reviews id={movieId} />} />
-          <Route path="cast" element={<Cast id={movieId} />} />
-        </Routes>
+        <Suspense fallback={<div>Loading page...</div>}>
+          <Routes>
+            <Route path="reviews" element={<Reviews id={movieId} />} />
+            <Route path="cast" element={<Cast id={movieId} />} />
+          </Routes>
+        </Suspense>
       </>
     );
   }
